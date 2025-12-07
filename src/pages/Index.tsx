@@ -42,6 +42,7 @@ const Index = () => {
       const response = await startGeneration({
         user_input: state.userInput,
         evaluators: state.selectedEvaluators,
+        generator: state.generatorCategory,
       });
 
       setGenerationResult(

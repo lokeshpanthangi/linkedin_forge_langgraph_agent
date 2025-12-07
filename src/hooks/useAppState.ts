@@ -2,16 +2,16 @@ import { useState, useCallback } from "react";
 import { AppState, AppStage, Evaluations, GeneratorCategory } from "@/types/api";
 
 const AVAILABLE_EVALUATORS = [
-  { id: "linkedin_expert", label: "LinkedIn Expert", icon: "Linkedin" },
-  { id: "devops_engineer", label: "DevOps Engineer", icon: "Server" },
-  { id: "genai_engineer", label: "GenAI Engineer", icon: "Brain" },
-  { id: "backend_engineer", label: "Backend Engineer", icon: "Database" },
-  { id: "hiring_manager", label: "Hiring Manager", icon: "Users" },
+  { id: "linkedin_expert_evaluation", label: "LinkedIn Expert", icon: "Linkedin" },
+  { id: "devops_engineer_evaluation", label: "DevOps Engineer", icon: "Server" },
+  { id: "genai_engineer_evaluation", label: "GenAI Engineer", icon: "Brain" },
+  { id: "backend_engineer_evaluation", label: "Backend Engineer", icon: "Database" },
+  { id: "hiring_manager_evaluation", label: "Hiring Manager", icon: "Users" },
 ] as const;
 
-const GENERATOR_CATEGORIES: GeneratorCategory[] = ["AI", "ML", "Medical", "Social", "General", "None"];
+const GENERATOR_CATEGORIES: GeneratorCategory[] = ["ai", "ml", "devops", "backend", "fullstack", "blockchain"];
 
-const DEFAULT_EVALUATORS = ["linkedin_expert", "devops_engineer"];
+const DEFAULT_EVALUATORS = ["linkedin_expert_evaluation", "genai_engineer_evaluation"];
 
 const initialState: AppState = {
   stage: "input",
@@ -20,7 +20,7 @@ const initialState: AppState = {
   evaluations: {},
   userInput: "",
   selectedEvaluators: DEFAULT_EVALUATORS,
-  generatorCategory: "None",
+  generatorCategory: "ai",
 };
 
 export function useAppState() {

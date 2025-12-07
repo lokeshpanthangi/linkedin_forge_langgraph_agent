@@ -1,9 +1,9 @@
-export type GeneratorCategory = "AI" | "ML" | "Medical" | "Social" | "General" | "None";
+export type GeneratorCategory = "ai" | "ml" | "devops" | "backend" | "fullstack" | "blockchain";
 
 export interface StartGenerationRequest {
   user_input: string;
   evaluators: string[];
-  generator?: GeneratorCategory;
+  generator: string;
 }
 
 export interface Evaluations {

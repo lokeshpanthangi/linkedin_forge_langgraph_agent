@@ -1,6 +1,6 @@
 import { StartGenerationRequest, FeedbackRequest, GenerationResponse } from "@/types/api";
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export async function startGeneration(payload: StartGenerationRequest): Promise<GenerationResponse> {
   const response = await fetch(`${API_BASE_URL}/start_generation`, {

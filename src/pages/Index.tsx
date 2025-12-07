@@ -15,11 +15,13 @@ const Index = () => {
     setStage,
     setUserInput,
     toggleEvaluator,
+    setGeneratorCategory,
     setGenerationResult,
     updateReviewData,
     setSuccess,
     reset,
     availableEvaluators,
+    generatorCategories,
   } = useAppState();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -126,8 +128,11 @@ const Index = () => {
                 userInput={state.userInput}
                 selectedEvaluators={state.selectedEvaluators}
                 availableEvaluators={availableEvaluators}
+                generatorCategory={state.generatorCategory}
+                generatorCategories={generatorCategories}
                 onInputChange={setUserInput}
                 onToggleEvaluator={toggleEvaluator}
+                onGeneratorChange={setGeneratorCategory}
                 onGenerate={handleGenerate}
                 isLoading={false}
               />

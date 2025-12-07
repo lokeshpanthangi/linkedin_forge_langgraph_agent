@@ -2,6 +2,14 @@ import { motion } from "framer-motion";
 import { Wand2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EvaluatorChip } from "./EvaluatorChip";
+import { GeneratorCategory } from "@/types/api";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Evaluator {
   id: string;
@@ -13,8 +21,11 @@ interface InputViewProps {
   userInput: string;
   selectedEvaluators: string[];
   availableEvaluators: readonly Evaluator[];
+  generatorCategory: GeneratorCategory;
+  generatorCategories: GeneratorCategory[];
   onInputChange: (value: string) => void;
   onToggleEvaluator: (id: string) => void;
+  onGeneratorChange: (value: GeneratorCategory) => void;
   onGenerate: () => void;
   isLoading: boolean;
 }
@@ -23,8 +34,11 @@ export function InputView({
   userInput,
   selectedEvaluators,
   availableEvaluators,
+  generatorCategory,
+  generatorCategories,
   onInputChange,
   onToggleEvaluator,
+  onGeneratorChange,
   onGenerate,
   isLoading,
 }: InputViewProps) {
@@ -54,7 +68,23 @@ export function InputView({
           placeholder="The future of AI in healthcare, my journey learning Kubernetes, thoughts on remote work culture..."
           className="w-full h-40 px-5 py-4 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-none text-foreground placeholder:text-muted-foreground"
         />
-        <div className="flex justify-end mt-2">
+        
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center gap-3">
+            <label className="text-sm font-medium text-foreground">Generator:</label>
+            <Select value={generatorCategory} onValueChange={onGeneratorChange}>
+              <SelectTrigger className="w-40 bg-background/50 border-border">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent className="bg-background border-border">
+                {generatorCategories.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           <span className="text-sm text-muted-foreground">
             {userInput.length} characters
           </span>

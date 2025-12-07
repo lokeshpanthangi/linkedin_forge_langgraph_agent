@@ -1,6 +1,9 @@
+export type GeneratorCategory = "AI" | "ML" | "Medical" | "Social" | "General" | "None";
+
 export interface StartGenerationRequest {
   user_input: string;
   evaluators: string[];
+  generator?: GeneratorCategory;
 }
 
 export interface Evaluations {
@@ -29,4 +32,5 @@ export interface AppState {
   evaluations: Evaluations;
   userInput: string;
   selectedEvaluators: string[];
+  generatorCategory: GeneratorCategory;
 }

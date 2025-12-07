@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { AppState, AppStage, Evaluations } from "@/types/api";
+import { AppState, AppStage, Evaluations, GeneratorCategory } from "@/types/api";
 
 const AVAILABLE_EVALUATORS = [
   { id: "linkedin_expert", label: "LinkedIn Expert", icon: "Linkedin" },
@@ -8,6 +8,8 @@ const AVAILABLE_EVALUATORS = [
   { id: "backend_engineer", label: "Backend Engineer", icon: "Database" },
   { id: "hiring_manager", label: "Hiring Manager", icon: "Users" },
 ] as const;
+
+const GENERATOR_CATEGORIES: GeneratorCategory[] = ["AI", "ML", "Medical", "Social", "General", "None"];
 
 const DEFAULT_EVALUATORS = ["linkedin_expert", "devops_engineer"];
 
@@ -18,6 +20,7 @@ const initialState: AppState = {
   evaluations: {},
   userInput: "",
   selectedEvaluators: DEFAULT_EVALUATORS,
+  generatorCategory: "None",
 };
 
 export function useAppState() {
@@ -39,6 +42,10 @@ export function useAppState() {
         : [...prev.selectedEvaluators, evaluatorId];
       return { ...prev, selectedEvaluators: newEvaluators };
     });
+  }, []);
+
+  const setGeneratorCategory = useCallback((generatorCategory: GeneratorCategory) => {
+    setState((prev) => ({ ...prev, generatorCategory }));
   }, []);
 
   const setGenerationResult = useCallback(
@@ -78,10 +85,12 @@ export function useAppState() {
     setStage,
     setUserInput,
     toggleEvaluator,
+    setGeneratorCategory,
     setGenerationResult,
     updateReviewData,
     setSuccess,
     reset,
     availableEvaluators: AVAILABLE_EVALUATORS,
+    generatorCategories: GENERATOR_CATEGORIES,
   };
 }
